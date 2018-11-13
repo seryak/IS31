@@ -1,31 +1,28 @@
-<form action=" " name="kalk" method="get">
-<input type="text" name="value1">
-<select name="op">
-<option name="sum" value="+">+</option>
-<option name="raz" value="-">-</option>
-<option name="mul" value="*">*</option>
-<option name="del" value="/">/</option>
-</select>
-<input type="text" name="value2"><br>
-<input type="submit" name="buttonkal" value="вычислить">
-</form>
 <?php
-var_dump($_GET);
-if ($_GET['buttonkal'] = "вычислить") {
-    if($_GET['op']= '+') {
-        echo 'плюс';
-        $r=$_GET['value1'] + $_GET['value2'];
-        echo $r;
-    }
-    elseif($_GET['op']='-'){
-        echo 'минус';
-        $r=$_GET['value1'] - $_GET['value2'];
-        echo $r;
-    }
-    elseif($_GET['op']="*") {
-        echo 'умножить';
-        $r=$_GET['value1'] * $_GET['value2'];
-        echo $r;
-    }
-}
+$log = 'login';
+$pass = '1234';
 ?>
+
+<?php 
+if(($_GET["login"]==$log and $_GET["password"]==$pass) or (isset($_COOKIE["logg"]) and isset($_COOKIE["pas"]))) {
+	setcookie('logg', $_GET["login"]);
+	setcookie('pas', $_GET["password"]);
+	header('Location: '.'http://google.com');
+}
+
+?>
+
+<?php if(($_GET["login"]==$log and $_GET["password"]==$pass) or (isset($_COOKIE["logg"]) and isset($_COOKIE["pas"]))): ?>
+<?php setcookie('logg', $_GET["login"]); ?>
+<?php setcookie('pas', $_GET["password"]); ?>
+<form action=" " method="GET" name="dr">
+<input type="submit" name="kn" value="zachem">
+</form>
+<?php else: ?>
+	<form action=" " method="GET" name="vxod">
+<input type="text" name="login"><br>
+<input type="password" name="password"><br>
+<input type="submit" name="enter">
+</form>
+<?php endif; ?>
+<?php print_r( $_GET); ?>
